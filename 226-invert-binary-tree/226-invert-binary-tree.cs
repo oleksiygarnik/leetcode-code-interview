@@ -13,11 +13,6 @@
  */
 public class Solution {
     public TreeNode InvertTree(TreeNode root) {
-        return BinaryTree(root);
-    }
-    
-    private TreeNode BinaryTree(TreeNode root)
-    {
         if(root is null)
             return null;
         
@@ -25,8 +20,8 @@ public class Solution {
         root.left = root.right;
         root.right = temp;
         
-        BinaryTree(root.left);
-        BinaryTree(root.right);
+        InvertTree(root.left);
+        InvertTree(root.right);
         
         return root;
     }
