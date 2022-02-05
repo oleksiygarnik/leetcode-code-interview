@@ -1,24 +1,18 @@
 public class Solution {
     public int[] DiStringMatch(string s) {
-        var result = new List<int>();
+        var result = new int[s.Length + 1];
         var left = 0;
         var right = s.Length;
         for(int i = 0; i < s.Length; i++)
         {
             if(s[i] == 'I')
-            {
-                result.Add(left);
-                left++;
-            }
+                result[i] = left++;
             else
-            {
-                result.Add(right);
-                right--;
-            }
+                result[i] = right--;
         }
         
-        result.Add(left);
+        result[s.Length] = left;
         
-        return result.ToArray();
+        return result;
     }
 }
