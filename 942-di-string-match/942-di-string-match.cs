@@ -1,23 +1,25 @@
 public class Solution {
     public int[] DiStringMatch(string s) {
         var result = new List<int>();
-        var numbers = Enumerable.Range(0, s.Length + 1).ToList();
+        var numbers = Enumerable.Range(0, s.Length + 1).ToArray();
+        var left = 0;
+        var right = numbers.Length - 1;
         for(int i = 0; i < s.Length; i++)
         {
             if(s[i] == 'I')
             {
-                result.Add(numbers.First());
-                numbers = numbers.Skip(1).ToList();
+                result.Add(numbers[left]);
+                left++;
             }
             
             if(s[i] == 'D')
             {
-                result.Add(numbers.Last());
-                numbers = numbers.Take(numbers.Count() - 1).ToList();
+                result.Add(numbers[right]);
+                right--;
             }
         }
         
-        result.Add(numbers.First());
+        result.Add(numbers[left]);
         
         return result.ToArray();
     }
