@@ -1,17 +1,27 @@
 public class Solution {
     public char FindTheDifference(string s, string t) 
     {
-        s = new string(s.OrderBy(x => x).ToArray());
-        t = new string(t.OrderBy(x => x).ToArray());
-        if(s.Length == 0)
-            return t[0];
-        
-        for(int i = 0; i < s.Length; i++)
+        var dict = new Dictionary<char, int>();
+        foreach(var ch in s)
         {
-            if(t[i] != s[i])
-                return t[i];
+            if(dict.ContainsKey(ch))
+                dict[ch]++;
+            else
+                dict.Add(ch, 1);
         }
         
-        return t[t.Length - 1];
+        foreach(var ch in t)
+        {
+            if(dict.TryGetValue(ch, out var res))
+            {
+                dict[ch] = --res;
+                if(res == 0)
+                    dict.Remove(ch);
+            }
+            else
+               return ch;
+        }
+               
+        return 'a';
     }
 }
