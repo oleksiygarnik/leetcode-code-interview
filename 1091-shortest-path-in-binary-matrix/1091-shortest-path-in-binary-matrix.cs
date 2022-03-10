@@ -1,10 +1,10 @@
 public class Solution 
 {
+    private static int[] directionsRow = new int[]{ -1, -1, -1, 0, 0, 0, 1, 1, 1 };
+    private static int[] directionsColumn = new int[]{ -1, 0, 1, -1, 0, 1, -1, 0, 1 };
+    
     public int ShortestPathBinaryMatrix(int[][] grid) 
     {
-        var directionsRow = new int[]{ -1, -1, -1, 0, 0, 0, 1, 1, 1 };
-        var directionsColumn = new int[]{ -1, 0, 1, -1, 0, 1, -1, 0, 1 };
-        
         if(grid[0][0] != 0 || grid[grid.Length - 1][grid.Length - 1] != 0)
             return -1;
         
