@@ -1,11 +1,11 @@
-public class Solution {
-    private static int[] dRow = new int[]{ -1, -1, -1, 0, 0, 0, 1, 1, 1 };
-    private static int[] dCol = new int[]{ -1, 0, 1, -1, 0, 1, -1, 0, 1 };
-    
-    public int ShortestPathBinaryMatrix(int[][] grid) {
-        var length = grid.Length;
+public class Solution 
+{
+    public int ShortestPathBinaryMatrix(int[][] grid) 
+    {
+        var directionsRow = new int[]{ -1, -1, -1, 0, 0, 0, 1, 1, 1 };
+        var directionsColumn = new int[]{ -1, 0, 1, -1, 0, 1, -1, 0, 1 };
         
-        if(grid[0][0] != 0 || grid[length - 1][length - 1] != 0)
+        if(grid[0][0] != 0 || grid[grid.Length - 1][grid.Length - 1] != 0)
             return -1;
         
         var queue = new Queue<Tuple<int, int>>();
@@ -25,15 +25,15 @@ public class Solution {
             
             for(int i = 0; i < 9; i++)
             {
-                var adjx = row + dRow[i];
-                var adjy = column + dCol[i];
+                var newRow = row + directionsRow[i];
+                var newColumn = column + directionsColumn[i];
                 
-                if(!IsValid(grid, adjx, adjy))
-                    continue;
-                
-                queue.Enqueue(Tuple.Create(adjx, adjy));
-                
-                grid[adjx][adjy] = distance + 1;
+                if(IsValid(grid, newRow, newColumn))
+                {
+                    queue.Enqueue(Tuple.Create(newRow, newColumn));
+                    
+                    grid[newRow][newColumn] = distance + 1;
+                }
             }
         }
         
