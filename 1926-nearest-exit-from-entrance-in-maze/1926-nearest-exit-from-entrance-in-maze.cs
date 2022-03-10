@@ -1,33 +1,11 @@
-public class Solution {
-    private static int[] dRow = { 0, -1, 0, 1 };
-    private static int[] dCol = { -1, 0, 1, 0 };
-    
-    public int NearestExit(char[][] maze, int[] entrance) {
-      
-        bool isExists = false;
-        for(int i = 0; i < maze.Length; i++)
-        {
-            if(maze[i][0] == '.' || maze[i][maze[i].Length - 1] == '.')
-            {
-                isExists = true;
-                break;
-            }
-        }
+public class Solution 
+{
+    public int NearestExit(char[][] maze, int[] entrance) 
+    {
+        var directionsRow = new int[]{ 0, -1, 0, 1 };
+        var directionsColumn = new int[]{ -1, 0, 1, 0 };
         
-        if(!isExists)
-        {
-            for(int i = 0; i < maze[0].Length; i++)
-            {
-                if(maze[0][i] == '.' || maze[maze.Length - 1][i] == '.')
-                {
-                    isExists = true;
-                    break;
-                }
-            
-            }
-        }
-        
-        if(!isExists)
+        if(!IsExistsExit(maze))
             return -1;
         
         var queue = new Queue<Tuple<int, int>>();
@@ -44,14 +22,11 @@ public class Solution {
             var row = current.Item1;
             var column = current.Item2;
             var distance = visited[row, column];
-            
-            // if(!IsStart(row, column, entrance[0], entrance[1]) && IsExit(maze, row, column))
-            //     return visited[row, column];
                 
             for(int i = 0; i < 4; i++)
             {
-                var newRow = row + dRow[i];
-                var newColumn = column + dCol[i];
+                var newRow = row + directionsRow[i];
+                var newColumn = column + directionsColumn[i];
                 
                 if(IsValid(maze, newRow, newColumn))
                 {
@@ -86,6 +61,16 @@ public class Solution {
         return false;
     }
     
-    private bool IsStart(int row, int column, int startRow, int startColumn) => 
-        row == startRow && column == startColumn;
+    private bool IsExistsExit(char[][] maze)
+    {
+        for(int i = 0; i < maze.Length; i++)
+            if(maze[i][0] == '.' || maze[i][maze[i].Length - 1] == '.')
+                return true;
+        
+        for(int i = 0; i < maze[0].Length; i++)
+            if(maze[0][i] == '.' || maze[maze.Length - 1][i] == '.')
+                return true;
+        
+        return false;
+    }
 }
