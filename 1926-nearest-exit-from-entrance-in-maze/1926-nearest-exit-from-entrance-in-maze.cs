@@ -4,31 +4,31 @@ public class Solution {
     
     public int NearestExit(char[][] maze, int[] entrance) {
       
-//         bool isExists = false;
-//         for(int i = 0; i < maze.Length; i++)
-//         {
-//             if(maze[i][0] == '.' || maze[i][maze[i].Length - 1] == '.')
-//             {
-//                 isExists = true;
-//                 break;
-//             }
-//         }
+        bool isExists = false;
+        for(int i = 0; i < maze.Length; i++)
+        {
+            if(maze[i][0] == '.' || maze[i][maze[i].Length - 1] == '.')
+            {
+                isExists = true;
+                break;
+            }
+        }
         
-//         if(!isExists)
-//         {
-//             for(int i = 0; i < maze[0].Length; i++)
-//             {
-//                 if(maze[0][i] == '.' || maze[maze.Length - 1][i] == '.')
-//                 {
-//                     isExists = true;
-//                     break;
-//                 }
+        if(!isExists)
+        {
+            for(int i = 0; i < maze[0].Length; i++)
+            {
+                if(maze[0][i] == '.' || maze[maze.Length - 1][i] == '.')
+                {
+                    isExists = true;
+                    break;
+                }
             
-//             }
-//         }
+            }
+        }
         
-//         if(!isExists)
-//             return -1;
+        if(!isExists)
+            return -1;
         
         var queue = new Queue<Tuple<int, int>>();
         queue.Enqueue(Tuple.Create(entrance[0], entrance[1]));
