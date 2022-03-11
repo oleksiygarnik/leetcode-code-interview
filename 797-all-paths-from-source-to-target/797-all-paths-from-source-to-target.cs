@@ -1,22 +1,24 @@
-public class Solution {
+public class Solution 
+{
+    private List<IList<int>> AllPaths = new List<IList<int>>();
+    
     public IList<IList<int>> AllPathsSourceTarget(int[][] graph) 
     {
-        var result = new List<IList<int>>();
         var visited = new bool[graph.Length];
         
-        Dfs(result, graph, new List<int>(){ 0 }, visited, 0);
+        Dfs(graph, new List<int>(){ 0 }, visited, 0);
         
-        return result;
+        return AllPaths;
     }
     
-    private void Dfs(List<IList<int>> result, int[][] graph, List<int> path, bool[] visited, int source)
+    private void Dfs(int[][] graph, List<int> path, bool[] visited, int source)
     {
         if(visited[source])
             return;
         
         if(source == graph.Length - 1)
         {
-            result.Add(path.GetRange(0, path.Count));
+            AllPaths.Add(path.GetRange(0, path.Count));
             return;
         }
         
@@ -25,7 +27,7 @@ public class Solution {
             if(!visited[neighbour])
             {
                 path.Add(neighbour);
-                Dfs(result, graph, path, visited, neighbour);
+                Dfs(graph, path, visited, neighbour);
         
                 visited[neighbour] = false;
                 path.RemoveAt(path.Count - 1);
