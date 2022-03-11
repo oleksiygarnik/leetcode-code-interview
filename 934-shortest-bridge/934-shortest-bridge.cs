@@ -27,16 +27,6 @@ public class Solution {
         foreach(var keyValue in island)
             min = Math.Min(min, Bfs(grid, keyValue.Item1, keyValue.Item2));
         
-//         for(int i = 0; i < grid.Length; i++)
-//         {
-//             for(int j = 0; j < grid[i].Length; j++)
-//             {
-//                 Console.Write(grid[i][j] + " ");
-//             }
-            
-//             Console.WriteLine();
-//         }
-        
         return min;
     }
     
