@@ -13,16 +13,15 @@ public class Solution {
         for(int i = 0; i < blueEdges.Length; i++)
             storage[blueEdges[i][0]].Add(Tuple.Create(blueEdges[i][1], 1));
         
-        //var visited = new bool[n];
-        var visited = new HashSet<(int, int)>();
-        return Bfs(storage, n, visited);
+        return Bfs(storage, n);
     }
     
-    private int[] Bfs(Dictionary<int, List<Tuple<int, int>>> storage, int n,  HashSet<(int, int)> visited)
+    private int[] Bfs(Dictionary<int, List<Tuple<int, int>>> storage, int n)
     {
         var result = new int[n];
         Array.Fill(result, -1);
         
+        var visited = new HashSet<(int, int)>();
         var queue = new Queue<Tuple<int,int>>();
         queue.Enqueue(Tuple.Create(0,0));
         queue.Enqueue(Tuple.Create(0,1));
@@ -48,23 +47,16 @@ public class Solution {
                     if(visited.Contains((neighbour.Item1, neighbour.Item2)))
                         continue;
                     
-                    if(color == 0)
+                    if(color == 0 && neighbour.Item2 == 1)
                     {
-                        if(neighbour.Item2 == 0)
-                            continue;
-                        
                          visited.Add((neighbour.Item1, 1));
                          queue.Enqueue(Tuple.Create(neighbour.Item1, 1));
                     }
-                    else
+                    else if(color == 1 && neighbour.Item2 == 0)
                     {
-                        if(neighbour.Item2 == 1)
-                            continue;
-                        
                          visited.Add((neighbour.Item1, 0));
                          queue.Enqueue(Tuple.Create(neighbour.Item1, 0));
                     }
-                    
                 }
             }
             
