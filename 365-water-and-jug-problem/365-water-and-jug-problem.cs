@@ -14,9 +14,9 @@ public class Solution {
         
         while(queue.Count() > 0)
         {
-            var size = queue.Count();
-            while(size-- > 0)
-            {
+            // var size = queue.Count();
+            // while(size-- > 0)
+            // {
             var current = queue.Dequeue();
             
             if(current == targetCapacity)
@@ -38,7 +38,7 @@ public class Solution {
                     queue.Enqueue(next);
                 }
             }
-            }
+            //}
         }
         
         return false;
