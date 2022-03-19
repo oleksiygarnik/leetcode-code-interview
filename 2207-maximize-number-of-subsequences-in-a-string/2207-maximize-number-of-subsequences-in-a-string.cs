@@ -1,30 +1,19 @@
 public class Solution {
     public long MaximumSubsequenceCount(string text, string pattern) 
     {
-            long firstCount = 0;
-            long secondCount = 0;
-            long result = 0;
-        
-            var firstChar = pattern[0];
-            var secondChar = pattern[1];
+            long firstCount = 0, secondCount = 0, result = 0;
             for (int i = 0; i < text.Length; i++)
             {
-                var current = text[i];
-              
-                if (current == secondChar)
+                if (text[i] == pattern[1])
                 {
                     result += firstCount;
                     secondCount++;
                 }
                 
-                  if (current == firstChar)
+                  if (text[i] == pattern[0])
                     firstCount++;
-
             }
 
-            if (firstCount <= secondCount)
-                return result + secondCount;
-            else
-                return result + firstCount;
+        return result + Math.Max(firstCount, secondCount);
     }
 }
