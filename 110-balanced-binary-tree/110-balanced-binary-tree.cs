@@ -28,12 +28,6 @@ public class Solution {
         if(root is null)
             return 0;
         
-        var left = GetHeight(root.left);
-        var right = GetHeight(root.right);
-        
-        if(left > right)
-            return left + 1;
-        else
-            return right + 1;
+        return 1 + Math.Max(GetHeight(root.left), GetHeight(root.right));
     }
 }
