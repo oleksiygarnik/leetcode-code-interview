@@ -1,16 +1,29 @@
 public class Solution {
     public int BrokenCalc(int startValue, int target) 
     {
-        int ans = 0;
-        while (target != startValue) {
+            int ans = 0;
+        while (target > startValue) {
             ans++;
-            if (target < startValue || target % 2 == 1)
+            if (target % 2 == 1)
                 target++;
             else
                 target /= 2;
         }
 
-        return ans; //+ startValue - target;
+        return ans + startValue - target;         
+         
+
+        
+//         int ans = 0;
+//         while (target != startValue) {
+//             ans++;
+//             if (target < startValue || target % 2 == 1)
+//                 target++;
+//             else
+//                 target /= 2;
+//         }
+
+//         return ans;
     }
     
 //     private int GetNum(int currentValue, int target, int distance)
