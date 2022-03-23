@@ -1,16 +1,17 @@
 public class MapSum 
 {
-    public Dictionary<string, int> Unique;
+    public Dictionary<string, int> Storage;
     public TrieNode Root;
     
     public MapSum() {
         Root = new TrieNode(0);
-        Unique = new Dictionary<string, int>();
+        Storage = new Dictionary<string, int>();
     }
     
     public void Insert(string key, int val) 
     {
         var current = Root;
+        var isDuplicate = Storage.ContainsKey(key);
         
         for(int i = 0; i < key.Length; i++)
         {
@@ -19,8 +20,8 @@ public class MapSum
                 current.Children[index] = new TrieNode(val);
             else
             {
-                if(Unique.ContainsKey(key))
-                    current.Children[index].Sum -= Unique[key];
+                if(isDuplicate)
+                    current.Children[index].Sum -= Storage[key];
                 
                 current.Children[index].Sum += val;
             }
@@ -28,11 +29,10 @@ public class MapSum
             current = current.Children[index];
         }
         
-        current.IsEnd = true;
-        if(Unique.ContainsKey(key))
-            Unique[key] = val;
+        if(isDuplicate)
+            Storage[key] = val;
         else
-            Unique.Add(key, val);
+            Storage.Add(key, val);
     }
     
     public int Sum(string prefix) 
@@ -53,15 +53,14 @@ public class MapSum
     
     public class TrieNode
     {
-        public TrieNode[] Children = new TrieNode[26];
-        
-        public bool IsEnd;
+        public TrieNode[] Children;
         
         public int Sum;
         
         public TrieNode(int sum)
         {
             Sum = sum;
+            Children = new TrieNode[26];
         }
     }
 }
