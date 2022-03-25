@@ -10,11 +10,8 @@ public class Solution
         
         var result = 0;
         for(int i = 0; i < costs.Length/2; i++)
-            result+=costs[priority[i].Item2][0];
+            result+=costs[priority[i].Item2][0] + costs[priority[i + costs.Length/2].Item2][1];
         
-        for(int i = costs.Length/2; i < costs.Length; i++)
-            result+=costs[priority[i].Item2][1];
-
         return result;
     }
 }
