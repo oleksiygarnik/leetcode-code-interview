@@ -7,11 +7,9 @@ public class Solution {
            {
                if(j == 0)
                    matrix[i][j] += Math.Min(matrix[i + 1][j], matrix[i + 1][j + 1]);
-               
-               if(j == matrix[i].Length - 1)
+               else if(j == matrix[i].Length - 1)
                    matrix[i][j] += Math.Min(matrix[i + 1][j], matrix[i + 1][j - 1]);
-               
-               if(j > 0 && j < matrix[i].Length - 1)
+               else if(j > 0 && j < matrix[i].Length - 1)
                    matrix[i][j] += Math.Min(Math.Min(matrix[i + 1][j], matrix[i + 1][j - 1]), matrix[i + 1][j + 1]);
            }
        }
