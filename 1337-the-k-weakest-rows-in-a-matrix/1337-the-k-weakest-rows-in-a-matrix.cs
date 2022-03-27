@@ -1,7 +1,8 @@
 public class Solution {
     public int[] KWeakestRows(int[][] mat, int k) 
     {
-        var arr = new Tuple<int,int>[mat.Length];
+        var pq = new PriorityQueue<int, Tuple<int, int>>(new Comparer());
+        
         for(int i = 0; i < mat.Length; i++)
         {
             var soldier = 0;
@@ -11,14 +12,25 @@ public class Solution {
                     soldier++;
             }
             
-            arr[i] = Tuple.Create(soldier, i);
+            pq.Enqueue(i, Tuple.Create(soldier, i));
         }
         
-        return arr.OrderBy(x => x.Item1)
-            .ThenBy(x => x.Item2)
-            .Take(k)
-            .Select(x => x.Item2)
-            .ToArray();
+        var res = new int[k];
+        for(int i = 0; i < k; i++)
+            res[i] = pq.Dequeue();
+        
+        return res;
+    }
+    
+     public class Comparer : IComparer<Tuple<int, int>>
+    {
+        public int Compare(Tuple<int,int> x, Tuple<int,int> y)
+        {
+            if(x.Item1 < y.Item1 || (x.Item1 == y.Item1 && x.Item2 < y.Item2)) 
+                return -1;
+            
+            return 1;
+        }
     }
 }
 
