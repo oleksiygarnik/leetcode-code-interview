@@ -1,9 +1,10 @@
 public class SeatManager 
 {
     private PriorityQueue<int, int> pq;
+    
     public SeatManager(int n) 
     {
-        pq = new PriorityQueue<int, int>(new Comparer());
+        pq = new PriorityQueue<int, int>();
         for(int i = 1; i <= n; i++)
             pq.Enqueue(i, i);
     }
@@ -11,19 +12,6 @@ public class SeatManager
     public int Reserve() 
     {
         return pq.Dequeue();
-        
-//         if(pq.Count == 0)
-//         {
-//             pq.Enqueue(1, 1);
-//             return 1;
-//         }
-//         else
-//         {
-//             var last = pq.Peek();
-//             pq.Enqueue(last + 1, last + 1);
-            
-//             return last + 1;
-//         }
     }
     
     public void Unreserve(int seatNumber) 
@@ -32,10 +20,7 @@ public class SeatManager
     }
 }
 
-public class Comparer : IComparer<int>
-{
-    public int Compare(int x, int y) => x.CompareTo(y);
-}
+
 
 /**
  * Your SeatManager object will be instantiated and called as such:
