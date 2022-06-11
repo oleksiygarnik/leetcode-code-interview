@@ -30,8 +30,8 @@ public class Solution {
             seen.Add(ch);
 
             var need = Char.IsLower(ch) 
-                ? Char.ToUpper(ch) 
-                : Char.ToLower(ch);
+                ? (char)(ch - 32) 
+                : (char)(ch + 32);
             
             if(missing.Contains(ch))
                  missing.Remove(ch);
