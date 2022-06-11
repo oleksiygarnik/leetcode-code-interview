@@ -4,38 +4,43 @@ public class Solution {
         var max = string.Empty;
         for(int i = 0; i < s.Length; i++)
         {
-           for(int j = i; j < s.Length; j++)
-           {
-               var substring = s.Substring(i, j - i + 1);
-               
-               if(IsNice(substring))
-               {
-                   max = Math.Max(substring.Length, max.Length) == max.Length 
-                       ? max 
-                       : substring;
-               }
+            for(int j = i; j < s.Length; j++)
+            {
+                var substring = s.Substring(i, j - i + 1);
+                
+                if(IsNice(substring))
+                {
+                    max = Math.Max(max.Length, substring.Length) == max.Length
+                        ? max 
+                        : substring;
+                }
             }
         }
         
         return max;
     }
-    
+
     private bool IsNice(string s)
     {
-        for(int i = 0; i < s.Length; i++)
+        var missing = new HashSet<char>();
+        var seen = new HashSet<char>();
+        
+        foreach(var ch in s)
         {
-            if(Char.IsLower(s[i]))
-            {
-                if(!s.Contains(Char.ToUpper(s[i]).ToString()))
-                    return false;
-            }
+            seen.Add(ch);
+
+            var need = Char.IsLower(ch) 
+                ? Char.ToUpper(ch) 
+                : Char.ToLower(ch);
+            
+            if(missing.Contains(ch))
+                 missing.Remove(ch);
+            if(seen.Contains(need))
+                continue;
             else
-            {
-                if(!s.Contains(Char.ToLower(s[i]).ToString()))
-                    return false;
-            }
+                missing.Add(need);
         }
         
-        return true;
+        return missing.Count() == 0;
     }
 }
