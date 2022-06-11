@@ -3,6 +3,7 @@ public class Solution {
     {
         var unique = GetUniqueChars(s);
         
+        var maxLength = 0;
         var max = string.Empty;
         for(int i = 0; i < s.Length; i++)
         {
@@ -15,12 +16,16 @@ public class Solution {
                     break;
                 
                 var substring = s.Substring(i, j - i + 1);
+                if(substring.Length <= maxLength)
+                    continue;
                 
                 if(IsNice(substring))
                 {
-                    max = Math.Max(max.Length, substring.Length) == max.Length
+                    max = Math.Max(maxLength, substring.Length) == maxLength
                         ? max 
                         : substring;
+                    
+                    maxLength = max.Length;
                 }
             }
         }
