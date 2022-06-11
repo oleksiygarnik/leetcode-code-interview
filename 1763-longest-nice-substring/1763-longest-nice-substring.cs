@@ -1,4 +1,5 @@
-public class Solution {
+public class Solution 
+{
     public string LongestNiceSubstring(string s) 
     {
         var unique = GetUniqueChars(s);
@@ -7,12 +8,12 @@ public class Solution {
         var max = string.Empty;
         for(int i = 0; i < s.Length; i++)
         {
-            if(unique.Contains(ToLower(s[i])))
+            if(unique.Contains(Char.ToLower(s[i])))
                 continue;
             
             for(int j = i; j < s.Length; j++)
             {
-                if(unique.Contains(ToLower(s[j])))
+                if(unique.Contains(Char.ToLower(s[j])))
                     break;
                 
                 var substring = s.Substring(i, j - i + 1);
@@ -74,9 +75,4 @@ public class Solution {
         
         return missing.Count() == 0;
     }
-    
-    private static char ToLower(char ch) => 
-        Char.IsLower(ch) 
-            ? ch 
-            : (char)(ch - 32);
 }
