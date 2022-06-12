@@ -1,40 +1,51 @@
 public class Solution {
-    public int[] SearchRange(int[] nums, int target) {
-        var left = 0; 
-        var right = nums.Length - 1;
+    public int[] SearchRange(int[] nums, int target) 
+    {
+        return BinarySearch(nums, target);
+    }
+    
+    private int[] BinarySearch(int[] nums, int target)
+    {
+        if(nums.Length == 1)
+        {
+            if(nums[0] == target)
+                return new[]{ 0, 0};
+            else
+                return new[]{ -1, -1 };
+        }
+        var result = new int[2];
+        
+        var index = int.MaxValue;
+        int left = 0, right = nums.Length - 1;
         while(left <= right)
         {
             var middle = left + (right - left)/2;
-            
             if(nums[middle] == target)
-                return Find(nums, middle, target);
+            {
+                index = middle;
+                break;
+            }
             
             if(nums[middle] > target)
                 right = middle - 1;
-            if(nums[middle] < target)
+            else
                 left = middle + 1;
         }
         
-        return new int[]{ -1, -1 };
-    }
-    
-    private int[] Find(int[] nums, int middle, int target)
-    {
-        int min = middle;
-        int max = middle;
-        while(middle >= 0 && nums[middle] == target)
-        {
-            min = middle;
-            middle--;
-        }
+        if(index == int.MaxValue)
+            return new []{ -1, -1}; 
         
-        middle = max;
-        while(middle < nums.Length && nums[middle] == target)
-        {
-            max = middle;
-            middle++;
-        }
+        var temp = index;
+        while(temp >= 0 && nums[temp] == target)
+            temp--;
         
-        return new int[]{ min, max };
+        result[0] = ++temp;
+        
+        while(index < nums.Length && nums[index] == target)
+            index++;
+        
+        result[1] = --index;
+        
+        return result;
     }
 }
