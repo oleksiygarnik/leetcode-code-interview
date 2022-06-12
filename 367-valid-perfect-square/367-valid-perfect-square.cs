@@ -10,10 +10,10 @@ public class Solution {
             var middle = left + (right - left)/2;
             if(middle * middle == num)
                 return true;
-            
+           
             if(middle > num/middle)
                 right = middle - 1;
-            else
+            else 
                 left = middle + 1;
         }
         
