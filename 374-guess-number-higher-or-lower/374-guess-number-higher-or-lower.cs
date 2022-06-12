@@ -11,17 +11,16 @@ public class Solution : GuessGame {
     public int GuessNumber(int n) 
     {
         int left = 1, right = n;
-        
         while(left <= right)
         {
             var middle = left + (right - left)/2;
-            
-            var result = guess(middle);
-            if(result == 0)
+            var answer = guess(middle);
+            if(answer == 0)
                 return middle;
-            else if(result == 1)
+             
+            if(answer == 1)
                 left = middle + 1;
-            else 
+            else
                 right = middle - 1;
         }
         
