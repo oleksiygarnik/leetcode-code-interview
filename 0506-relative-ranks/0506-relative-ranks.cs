@@ -12,15 +12,13 @@ public class Solution {
         while(queue.Count != 0)
         {
             var index = queue.Dequeue();
-            if(count == 1)
-                result[index] = "Gold Medal";
-            if(count == 2)
-                result[index] = "Silver Medal";
-            if(count == 3)
-                result[index] = "Bronze Medal";
-            
-            if(count > 3)
-                result[index] = count.ToString();
+            result[index] = count switch
+            {
+                1 => "Gold Medal",
+                2 => "Silver Medal",
+                3 => "Bronze Medal",
+                _ => count.ToString()
+            };
             
             count++;
         }
