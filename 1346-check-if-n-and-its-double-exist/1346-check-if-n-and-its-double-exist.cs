@@ -1,25 +1,33 @@
 public class Solution {
     public bool CheckIfExist(int[] arr) 
     {
-        var dict = new Dictionary<int, List<int>>();
+        Array.Sort(arr);
         for(int i = 0; i < arr.Length; i++)
         {
-            if(dict.ContainsKey(arr[i] * 2))
-                dict[arr[i] * 2].Add(i);
-            else
-                dict.Add(arr[i] * 2, new List<int>(){ i });
-        }
-        
-        for(int i = 0; i < arr.Length; i++)
-        {
-            if(dict.ContainsKey(arr[i]))
-            {
-                var possible = dict[arr[i]];
-                if(possible.Any(x => x != i))
-                    return true;
-            }
+            var answer = BinarySearch(arr, arr[i] * 2, i);
+            if(answer != -1)
+                return true;
         }
         
         return false;
+    }
+    
+    private int BinarySearch(int[] arr, int target, int currentIndex)
+    {
+        var left = 0;
+        var right = arr.Length - 1;
+        while(left <= right)
+        {
+            var mid = left + (right - left)/2;
+            if(target == arr[mid] && currentIndex != mid)
+                return mid;
+            
+            if(arr[mid] < target)
+                left = mid + 1;
+            else
+                right = mid - 1;
+        }
+        
+        return -1;
     }
 }
